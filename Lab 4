@@ -1,0 +1,68 @@
+#include <iostream>  
+#include <iomanip>  // Needed for formatting the output  
+using namespace std;  
+
+int main() {  
+    // (1) Declare the variables  
+    int employeeNumber;  
+    int hoursWorked;  
+    double hourlyWage;  
+    double grossPay;  
+    double federalTax;  
+    double stateTax;  
+    double totalTaxes;  
+    double netPay;  
+    bool overtime = false;  
+
+    // (2) Prompt user and read the employee number  
+    cout << "Enter Employee Number: ";  
+    cin >> employeeNumber;  
+
+    // (3) Prompt user and read the number of hours worked  
+    cout << "Enter Number of Hours Worked This Week: ";  
+    cin >> hoursWorked;  
+
+    // (4) Prompt user and read the employee hourly wage  
+    cout << "Enter Hourly Wage: $";  
+    cin >> hourlyWage;  
+
+    // (5) Use a selection control structure to determine the gross pay  
+    // Check if overtime was worked (hours > 40)  
+    if (hoursWorked > 40) {  
+        // Overtime calculation: First 40 hours are paid at hourly wage,  
+        // remaining hours are paid at 1.5 times the hourly wage.  
+        grossPay = (40 * hourlyWage) + (1.5 * (hoursWorked - 40) * hourlyWage);  
+        overtime = true;  
+    } else {  
+        // Regular calculation: No overtime.  
+        grossPay = hoursWorked * hourlyWage;  
+        overtime = false;  
+    }  
+
+    // (7) Determine the federal and state taxes from the gross pay  
+    federalTax = 0.15 * grossPay;  // 15% federal tax  
+    stateTax   = 0.03 * grossPay;  // 3% state tax  
+    totalTaxes = federalTax + stateTax;  
+
+    // (8) Determine the net pay by subtracting total taxes from the gross pay  
+    netPay = grossPay - totalTaxes;  
+
+    // (9) Display the payroll report  
+    // Using fixed point notation with 2 decimals for monetary values.  
+    cout << fixed << setprecision(2) << "\n---------- Payroll Report ----------\n";  
+    cout << "Employee Number: " << employeeNumber << "\n";  
+    cout << "Number of Hours Worked This Week: " << hoursWorked << "\n";  
+    cout << "Hourly Wage: $" << hourlyWage << "\n";  
+    cout << "Gross Pay: $" << grossPay << "\n";  
+    cout << "Total Tax Deductions: $" << totalTaxes << "\n";  
+    cout << "Net Pay: $" << netPay << "\n";  
+
+    // (15) Display whether overtime pay is included  
+    if(overtime) {  
+        cout << "Overtime Pay Included" << "\n";  
+    } else {  
+        cout << "Overtime Pay Not Included" << "\n";  
+    }  
+
+    return 0;  
+}  
